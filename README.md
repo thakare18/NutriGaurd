@@ -124,8 +124,7 @@ Elderly → Use with caution (High Sugar)
 
 ### Contributors
 
-* **Prathamesh Vinayak Thakare** – ML Development & Project Lead
-* **Omkar Patil** – Backend Integration & Code Optimization
+* **Prathamesh Vinayak Thakare** – ML Development & Project Leader 
 
 ---
 
