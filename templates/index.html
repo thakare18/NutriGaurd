@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriGuard - Ingredient Health Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>NutriGuard</h1>
+            </div>
+            <p class="tagline">AI-Powered Ingredient Health Analyzer</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Analyze Your Ingredients</h2>
+                    <p>Enter ingredients separated by commas to get a health rating</p>
+                </div>
+
+                <div class="input-section">
+                    <label for="ingredients">Ingredient List</label>
+                    <textarea 
+                        id="ingredients" 
+                        placeholder="e.g., Corn flour, sugar, brown sugar, palm oil, coconut oil, salt, sodium citrate, artificial flavor, malic acid"
+                        rows="5"
+                    ></textarea>
+                    
+                    <button id="analyzeBtn" class="btn-primary">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Analyze Ingredients
+                    </button>
+
+                    <div class="example-section">
+                        <p class="example-label">Try an example:</p>
+                        <button class="btn-example" data-example="Whole wheat flour, honey, oats, almonds, olive oil">Healthy Example</button>
+                        <button class="btn-example" data-example="High fructose corn syrup, artificial colors, sodium benzoate, palm oil">Unhealthy Example</button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" class="results-section hidden">
+                    <div class="results-header">
+                        <h3>Analysis Results</h3>
+                    </div>
+                    
+                    <div class="rating-display">
+                        <div class="rating-circle">
+                            <svg class="rating-svg" viewBox="0 0 200 200">
+                                <circle class="rating-bg" cx="100" cy="100" r="85"></circle>
+                                <circle id="ratingProgress" class="rating-progress" cx="100" cy="100" r="85"></circle>
+                            </svg>
+                            <div class="rating-content">
+                                <div id="ratingValue" class="rating-value">-</div>
+                                <div class="rating-max">/ 10</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-info">
+                            <div id="healthLevel" class="health-level">Analyzing...</div>
+                            <div class="health-description">
+                                <p id="healthDescription">Enter ingredients to see health analysis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-analyzed">
+                        <h4>Ingredients Analyzed:</h4>
+                        <p id="analyzedIngredients"></p>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing ingredients...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="error" class="error hidden">
+                    <svg class="error-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <p id="errorMessage">Something went wrong</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by Machine Learning • Random Forest Regression</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
