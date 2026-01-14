@@ -1,8 +1,8 @@
 import joblib
 
 # ✅ Load the saved model & vectorizer
-loaded_rf = joblib.load("training_a_model/random_forest_model.pkl")
-loaded_tfidf = joblib.load("training_a_model/tfidf_vectorizer.pkl")
+loaded_rf = joblib.load("random_forest_model.pkl")
+loaded_tfidf = joblib.load("tfidf_vectorizer.pkl")
 
 # ✅ New ingredient input (comma-separated string)
 new_ingredient = "Corn flour, sugar, brown sugar,palm oil, coconut oil, salt, sodium citrate, artificial flavor, malic acid"
