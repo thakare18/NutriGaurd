@@ -11,9 +11,9 @@ VECTORIZER_PATH = "tfidf_vectorizer.pkl"
 try:
     model = joblib.load(MODEL_PATH)
     vectorizer = joblib.load(VECTORIZER_PATH)
-    print("✅ Model and vectorizer loaded successfully!")
+    print("Model and vectorizer loaded successfully!")
 except Exception as e:
-    print(f"❌ Error loading model: {e}")
+    print(f" Error loading model: {e}")
     model = None
     vectorizer = None
 
