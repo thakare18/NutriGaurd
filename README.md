@@ -72,7 +72,7 @@ NutriGuard/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/NutriGuard.git
+   git clone https://github.com/thakare18/NutriGuard.git
    cd NutriGuard
    ```
 
