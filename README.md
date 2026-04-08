@@ -12,6 +12,9 @@ It predicts whether a product is **safe or unsafe** for consumption based on **d
 The goal of the project is to promote **healthy and informed food choices** by helping users instantly check product safety through ingredient scanning.
 
 ---
+Live 
+
+Live Application: https://nutrigaurd.onrender.com
 
 ### Features
 
