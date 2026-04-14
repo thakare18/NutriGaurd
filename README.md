@@ -1,136 +1,112 @@
-## NutriGuard
+# NutriGuard
 
-**Smart Product Label Analyzer for Health Safety**
+AI-powered ingredient health analyzer built with Flask, scikit-learn, and a production-oriented project layout.
 
----
+Live app: https://nutrigaurd.onrender.com
 
-### Overview
+## Features
 
-**NutriGuard** is an intelligent system that analyzes food product ingredients using Machine Learning and Natural Language Processing (NLP).
-It predicts whether a product is **safe or unsafe** for consumption based on **different age categories** (children, adults, elderly).
+- Ingredient analysis using TF-IDF + Random Forest regression
+- Web UI for instant health score prediction
+- Service-oriented backend structure (app factory + route layer + predictor service)
+- Separate frontend asset/template directory for maintainability
+- Reusable model artifacts via joblib
 
-The goal of the project is to promote **healthy and informed food choices** by helping users instantly check product safety through ingredient scanning.
+## Production-Style Structure
 
----
-Live 
-
-Live Application: https://nutrigaurd.onrender.com
-
-### Features
-
-* Ingredient analysis using machine learning.
-* TF-IDF and Random Forest model for text-based predictions.
-* Age-based safety prediction.
-* Error handling for missing or corrupted data.
-* Model persistence using `.pkl` files for reuse.
-
----
-
-### Project Structure
-
-```
-NutriGuard/
-│
-├── .gitignore                     # Ignore unnecessary files
-├── modeel.py                      # Model training with error handling
-├── prddiction_of_ingred.py        # Ingredient safety prediction script
-├── random_forest_model.pkl        # Trained Random Forest model
-├── tfidf_vectorizer.pkl           # Saved TF-IDF vectorizer
-└── README.md                      # Project documentation
-```
-
----
-
-### How It Works
-
-1. **Data Preprocessing:**
-
-   * Cleans and tokenizes ingredient text.
-   * Converts text into numerical form using TF-IDF.
-
-2. **Model Training:**
-
-   * Trains a Random Forest Classifier on labeled datasets.
-   * Classifies ingredients as safe or unsafe for specific age groups.
-
-3. **Prediction:**
-
-   * User inputs an ingredient list or scanned text.
-   * Model predicts safety based on trained data.
-
----
-
-### Technologies Used
-
-* Python 3.x
-* pandas, NumPy
-* scikit-learn
-* joblib
-* regex, string
-
----
-
-### How to Run
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/thakare18/NutriGuard.git
-   cd NutriGuard
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Run the training script:
-
-   ```bash
-   python modeel.py
-   ```
-
-4. Run the prediction script:
-
-   ```bash
-   python prddiction_of_ingred.py
-   ```
-
----
-
-### Example Output
-
-**Input:**
-
-```
-Sugar, Artificial Flavors, Preservatives, Milk Solids
+```text
+Machine-learning-P1/
+├── backend/
+│   ├── __init__.py                # Flask app factory
+│   ├── config.py                  # Runtime and path settings
+│   ├── routes.py                  # HTTP routes (/ and /predict)
+│   ├── models/                    # Trained ML artifacts
+│   │   ├── random_forest_model.pkl
+│   │   └── tfidf_vectorizer.pkl
+│   └── services/
+│       └── predictor.py           # ML inference service
+├── frontend/
+│   ├── templates/
+│   │   └── index.html             # Main UI template
+│   └── static/
+│       ├── css/
+│       │   └── style.css          # UI styles
+│       └── js/
+│           └── script.js          # Client-side logic
+├── scripts/
+│   ├── train_model.py             # Train model and save artifacts
+│   └── predict_sample.py          # CLI sample prediction
+├── config/
+│   ├── deployment/
+│   │   ├── Procfile               # Canonical deploy process file
+│   │   └── runtime.txt            # Canonical Python runtime version
+│   ├── docs/
+│   │   └── DEPLOYMENT.md          # Deployment guide
+│   └── requirements/
+│       └── base.txt               # Canonical Python dependencies
+├── run.py                         # WSGI entrypoint for deployment
+├── app.py                         # Backward-compatible local runner
+├── requirements.txt               # Root compatibility file (includes config/requirements/base.txt)
+├── Procfile                       # Root compatibility file
+└── runtime.txt                    # Root compatibility file
 ```
 
-**Output:**
+## Local Development
 
+1. Install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
-Children → Unsafe
-Adults → Safe
-Elderly → Use with caution (High Sugar)
+
+2. Run the web app:
+
+```bash
+python run.py
 ```
 
----
+3. Open:
 
-### Future Enhancements
+```text
+http://localhost:5000
+```
 
-* Add OCR support to extract text from product labels.
-* Build a web interface using Flask or React.
-* Enable real-time camera scanning via mobile integration.
+## Model Training
 
----
+Train with default dataset/output paths:
 
-### Contributors
+```bash
+python scripts/train_model.py
+```
 
-* **Prathamesh Vinayak Thakare** – ML Development & Project Leader 
+Optional custom paths:
 
----
+```bash
+python scripts/train_model.py --data path/to/cleaned_ingredients_dataset.csv --model-output random_forest_model.pkl --vectorizer-output tfidf_vectorizer.pkl
+```
 
-### License
+Example with backend output location:
 
-This project is licensed under the **MIT License**.
+```bash
+python scripts/train_model.py --model-output backend/models/random_forest_model.pkl --vectorizer-output backend/models/tfidf_vectorizer.pkl
+```
+
+## Sample CLI Prediction
+
+```bash
+python scripts/predict_sample.py --ingredients "oats, almonds, honey"
+```
+
+## Deployment
+
+The app is deployment-ready with Gunicorn:
+
+```text
+web: gunicorn run:app
+```
+
+Note: canonical config copies live under `config/`, while root files are retained for platform compatibility.
+
+## License
+
+MIT License
